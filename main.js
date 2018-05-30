@@ -85,28 +85,27 @@ window.addEventListener('keyup', function(e) {
   if (e.keyCode in map) {
     map[e.keyCode] = false;
   }
-})
+});
 
 function compareKey(keycode) {
+  var checkArray = [];
   if (keycode in map) {
     map[keycode] = true;
-    if (map[32] && map [90]) {
-      console.log(map[32]);
-      checkBubble();
-    }
-    if (map[32] && map[69]) {
-
-    }
-    if (map[32] && map [82]) {
-
-    }
-    if (map[32] && map[84]) {
-
+    if (map[32] && map[90] || map[32] && map[69] || map[32] && map [82] || map[32] && map[84]) {
+      for (key in map) {
+        if (map[key] == true) {
+          for (let i = 0; i < ui.lines.length; i++) {
+            if (ui.lines[i].dataset.key == key) {
+              checkBubble(ui.lines[i]);
+            }
+          }
+        }
+      }
     }
   }
 }
 
-function checkBubble() {
+function checkBubble(line) {
 
 }
 

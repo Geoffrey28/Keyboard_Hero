@@ -16,7 +16,7 @@
 
 * 4 colonnes, avec une lettre chacune.
 * Faire apparaître une combinaison de 1 à 3 touches,
-<i>UNE SEULE PAR LIGNES A LA FOIS.<i>
+<i>UNE SEULE PAR LIGNE A LA FOIS.<i>
 * Chaque combinaison descend à une vitesse régulière,
 
 

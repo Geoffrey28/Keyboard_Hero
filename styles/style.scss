@@ -1,0 +1,85 @@
+body {
+  width: 90%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  height: 20vh;
+}
+
+.headMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.difficult {
+  display: flex;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.score {
+  text-align: center;
+}
+
+#game {
+  width: 100%;
+  height: 80vh;
+  background: lightblue;
+  display: flex;
+}
+
+.lines {
+  width: 25%;
+  height: 100%;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  align-items: center;
+  position: relative;
+}
+
+.bubbles {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.keyArea {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 8%;
+  bottom: 0;
+  border-top: 4px solid black;
+}
+
+.staticBubbles {
+  width: 25%;
+  height: 50px;
+  border-radius: 25px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.staticBubbles:nth-child(1) {
+  background: red;
+}
+.staticBubbles:nth-child(2) {
+  background: green;
+}
+.staticBubbles:nth-child(3) {
+  background: white;
+}
+.staticBubbles:nth-child(4) {
+  background: orange;
+}

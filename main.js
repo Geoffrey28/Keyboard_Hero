@@ -54,7 +54,8 @@ var partitions = {
   }
 };
 
-var keys = {
+var map = {
+  32: false, // Space
   90: false, // Z
   69: false, // E
   82: false, // R
@@ -69,31 +70,44 @@ var ui = {
 };
 
 var wave = 0,
-    bubbleInterval;
+    bubbleInterval,
+    mediator;
 
 ui.playButton.addEventListener('click', function() {
   launcher();
 });
 
 window.addEventListener('keydown', function(e) {
-  userPressKey(e.keyCode);
+  compareKey(e.keyCode);
 });
 
-function userPressKey(keycode) {
-  if (keycode in keys) {
-    keys[keycode] = true;
-    for (let i = 0; i < ui.lines.length; i++) {
-      var dataKey = ui.lines[i].dataset.key;
-      console.log(dataKey);
+window.addEventListener('keyup', function(e) {
+  if (e.keyCode in map) {
+    map[e.keyCode] = false;
+  }
+})
+
+function compareKey(keycode) {
+  if (keycode in map) {
+    map[keycode] = true;
+    if (map[32] && map [90]) {
+      console.log(map[32]);
+      checkBubble();
+    }
+    if (map[32] && map[69]) {
+
+    }
+    if (map[32] && map [82]) {
+
+    }
+    if (map[32] && map[84]) {
+
     }
   }
-  keys[keycode] = false;
 }
 
-function verifyBubble(line, key) {
-  if ( line.dataset.key == key) {
-    console.log(key);
-  }
+function checkBubble() {
+
 }
 
 function launcher() {

@@ -65,6 +65,7 @@ var map = {
 var ui = {
   playButton : document.getElementById('playButton'),
   diffSelect : document.getElementById('diffSelect'),
+  keyArea : document.getElementById('keyArea'),
   lines: document.querySelectorAll('.lines'),
   timer: document.getElementById('timerValue')
 };
@@ -88,14 +89,13 @@ window.addEventListener('keyup', function(e) {
 });
 
 function compareKey(keycode) {
-  var checkArray = [];
   if (keycode in map) {
     map[keycode] = true;
     if (map[32] && map[90] || map[32] && map[69] || map[32] && map [82] || map[32] && map[84]) {
       for (key in map) {
         if (map[key] == true) {
-          for (let i = 0; i < ui.lines.length; i++) {
-            if (ui.lines[i].dataset.key == key) {
+          for (var i = 0; i < ui.lines.length; i++) {
+            if (ui.lines[i].dataset.key == key && ui.lines[i].childNodes.length > 0) {
               checkBubble(ui.lines[i]);
             }
           }
@@ -106,11 +106,21 @@ function compareKey(keycode) {
 }
 
 function checkBubble(line) {
-
+  var bblPos = (line.childNodes[0].offsetHeight / 2) + line.childNodes[0].offsetTop;
+  var start = ui.keyArea.offsetTop;
+  var end = start + ui.keyArea.offsetHeight;
+  console.log(start, end, bblPos);
+  if (bblPos > start && bblPos < end) {
+    line.removeChild(line.childNodes[0]);
+    console.log('ok');
+  }
 }
 
 function launcher() {
-  bubbleInterval = window.setInterval(genBubble, 1000);
+  if (!bubbleInterval) {
+    console.log(bubbleInterval);
+    bubbleInterval = window.setInterval(genBubble, 1500);
+  }
 }
 
 function genBubble() {
@@ -122,7 +132,7 @@ function genBubble() {
         bubbleStyle(bubble, i);
         ui.lines[i].appendChild(bubble);
         if (ui.lines[i].lastChild !== null) {
-          translateBubble(ui.lines[i].lastChild);
+          translateBubble(ui.lines[i].lastChild, ui.lines[i]);
         }
       }
     }
@@ -134,10 +144,10 @@ function genBubble() {
   }
 }
 
-function translateBubble(bbl) {
+function translateBubble(bbl, line) {
   var pos = 0;
   var animInterval = setInterval( function() {
-    if (bbl.offsetTop >= 1000) {
+    if (pos > 100) {
       clearInterval(animInterval);
     } else {
       pos++;
@@ -169,4 +179,5 @@ function clearArea() {
       myNode.removeChild(myNode.firstChild);
      }
   }
+  wave = 0;
 }

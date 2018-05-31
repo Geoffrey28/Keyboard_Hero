@@ -62,10 +62,13 @@ var map = {
   84: false  // T
 };
 
+var suit = [];
+
 var ui = {
   playButton : document.getElementById('playButton'),
   diffSelect : document.getElementById('diffSelect'),
   keyArea : document.getElementById('keyArea'),
+  header: document.getElementById('header'),
   lines: document.querySelectorAll('.lines'),
   timer: document.getElementById('timerValue')
 };
@@ -83,6 +86,7 @@ window.addEventListener('keydown', function(e) {
 });
 
 window.addEventListener('keyup', function(e) {
+  suit = [];
   if (e.keyCode in map) {
     map[e.keyCode] = false;
   }
@@ -91,6 +95,14 @@ window.addEventListener('keyup', function(e) {
 function compareKey(keycode) {
   if (keycode in map) {
     map[keycode] = true;
+    for (key in map) {
+      if (map[key] == true && suit.length < 4 && keycode !== 32) {
+        suit.push(1);
+      } else if (map[key] !== true && suit.length < 4 && keycode !== 32) {
+        suit.push(0);
+      }
+    }
+    console.log(suit);
     if (map[32] && map[90] || map[32] && map[69] || map[32] && map [82] || map[32] && map[84]) {
       for (key in map) {
         if (map[key] == true) {
@@ -106,13 +118,12 @@ function compareKey(keycode) {
 }
 
 function checkBubble(line) {
-  var bblPos = (line.childNodes[0].offsetHeight / 2) + line.childNodes[0].offsetTop;
+  var bblPos = (line.childNodes[0].offsetHeight / 2) + line.childNodes[0].offsetTop + ui.header.offsetHeight;
   var start = ui.keyArea.offsetTop;
   var end = start + ui.keyArea.offsetHeight;
   console.log(start, end, bblPos);
   if (bblPos > start && bblPos < end) {
     line.removeChild(line.childNodes[0]);
-    console.log('ok');
   }
 }
 
